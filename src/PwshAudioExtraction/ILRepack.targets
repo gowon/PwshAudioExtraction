@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Target Name="ILRepacker" AfterTargets="Build" Condition="'$(Configuration)' == 'Release'">
+    <ItemGroup>
+      <InputAssemblies Include="$(TargetPath)"/>
+      <InputAssemblies Include="$(OutputPath)NYouTubeDL.dll" />
+      <InputAssemblies Include="$(OutputPath)Newtonsoft.Json.dll" />
+      <InputAssemblies Include="$(OutputPath)TagLibSharp.dll" />
+      <InputAssemblies Include="$(OutputPath)SkiaSharp.dll" />
+    </ItemGroup>
+    
+    <!--OutputFile="$(TargetDir)$(TargetName).merged$(TargetExt)"-->
+    <ILRepack
+      AllowDuplicateResources="false"
+      DebugInfo="false"
+      Internalize="true"
+      InputAssemblies="@(InputAssemblies)"
+      OutputFile="$(TargetPath)"
+      Parallel="true"
+      TargetKind="SameAsPrimaryAssembly" />
+  </Target>
+</Project>

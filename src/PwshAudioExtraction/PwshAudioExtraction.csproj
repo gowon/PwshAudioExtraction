@@ -1,0 +1,60 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>PwshAudioExtraction</AssemblyName>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ILRepack.Lib.MSBuild.Task" Version="2.0.18" />
+    <PackageReference Include="NYoutubeDL" Version="0.10.8" />
+    <PackageReference Include="PowerShellStandard.Library" Version="5.1.0">
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+    <!-- GeneratePathProperty does not work in VS2017, only in msbuild/dotnet cli https://github.com/NuGet/Home/issues/8374 -->
+    <PackageReference Include="SkiaSharp" Version="1.68.0" GeneratePathProperty="true" />
+    <PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="1.68.0" GeneratePathProperty="true" />
+    <PackageReference Include="TagLibSharp" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="PwshAudioExtraction.psd1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="PwshAudioExtraction.psm1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <Target Name="CopySkiaSharpNative" AfterTargets="Build">
+    <CreateProperty Value="%(PackageReference.Version)" Condition="%(PackageReference.Identity) == 'SkiaSharp'">
+      <Output TaskParameter="Value" PropertyName="SkiaSharpVersion" />
+    </CreateProperty>
+    <CreateProperty Value="%(PackageReference.Version)" Condition="%(PackageReference.Identity) == 'SkiaSharp.NativeAssets.Linux'">
+      <Output TaskParameter="Value" PropertyName="SkiaSharpNativeAssetsLinuxVersion" />
+    </CreateProperty>
+    <PropertyGroup>
+      <!-- GeneratePathProperty does not work in VS2017, only in msbuild/dotnet cli https://github.com/NuGet/Home/issues/8374 -->
+      <PkgSkiaSharp Condition="'$(PkgSkiaSharp)' == ''">$(NugetPackageRoot)SkiaSharp\$(SkiaSharpVersion)</PkgSkiaSharp>
+      <PkgSkiaSharp_NativeAssets_Linux Condition="'$(PkgSkiaSharp_NativeAssets_Linux)' == ''">$(NugetPackageRoot)SkiaSharp.NativeAssets.Linux\$(SkiaSharpVersion)</PkgSkiaSharp_NativeAssets_Linux>
+    </PropertyGroup>
+
+    <Message Text="Copying SkiaSharp native libraries..." Importance="high" />
+    
+    <Message Text="$(PkgSkiaSharp)\runtimes\win-x64\native\libSkiaSharp.dll" Importance="high" />
+    <Copy SourceFiles="$(PkgSkiaSharp)\runtimes\win-x64\native\libSkiaSharp.dll" DestinationFiles="$(TargetDir)libSkiaSharp.dll" />
+
+    <Message Text="$(PkgSkiaSharp)\runtimes\osx\native\libSkiaSharp.dylib" Importance="high" />
+    <Copy SourceFiles="$(PkgSkiaSharp)\runtimes\osx\native\libSkiaSharp.dylib" DestinationFiles="$(TargetDir)libSkiaSharp.dylib" />
+    
+    <Message Text="$(PkgSkiaSharp_NativeAssets_Linux)\runtimes\linux-x64\native\libSkiaSharp.so" Importance="high" />
+    <Copy SourceFiles="$(PkgSkiaSharp_NativeAssets_Linux)\runtimes\linux-x64\native\libSkiaSharp.so" DestinationFiles="$(TargetDir)libSkiaSharp.so" />
+    <Message Text="Copy complete." Importance="high" />
+  </Target>
+
+</Project>
