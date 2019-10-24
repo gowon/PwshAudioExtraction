@@ -1,4 +1,6 @@
 # PwshAudioExtraction
+[![Minimum Supported PowerShell Version](https://img.shields.io/badge/PowerShell-6.1+-blue.svg)](https://github.com/PowerShell/PowerShell)
+![Cross Platform](https://img.shields.io/badge/platform-windows%20%7C%20macos%20%7C%20linux-lightgrey)
 
 A PowerShell module for ripping and tagging audio from various media sources.
 
