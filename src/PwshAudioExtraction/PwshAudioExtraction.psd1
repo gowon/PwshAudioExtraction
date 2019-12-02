@@ -9,7 +9,7 @@
 @{
 
 # Script module or binary module file associated with this manifest.
-RootModule = 'PwshAudioExtraction.psm1'
+RootModule = 'PwshAudioExtraction.dll'
 
 # Version number of this module.
 ModuleVersion = '0.0.1.0'
@@ -67,7 +67,7 @@ Copyright = '(c) Gowon, Ltd. All rights reserved.'
 
 # https://stackoverflow.com/questions/26250806/invoking-functions-from-nested-modules-in-a-script-module-do-not-always-trigger
 # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
-NestedModules = @("PwshAudioExtraction.dll")
+NestedModules = @("PwshAudioExtraction.psm1")
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
 FunctionsToExport = @("Invoke-FetchAudio")

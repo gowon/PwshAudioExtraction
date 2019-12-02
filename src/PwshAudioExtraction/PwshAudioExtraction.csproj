@@ -23,6 +23,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="$(ProjectDir)Private\**" CopyToOutputDirectory="Always" />
+    <None Update="$(ProjectDir)Public\**" CopyToOutputDirectory="Always" />
+    <None Update="install-module-local.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="PwshAudioExtraction.psd1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
