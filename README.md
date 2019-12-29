@@ -14,24 +14,20 @@ The following applications need to be installed on your machine:
 
 The following libraries are used in this module:
 
+- [NYoutubeDL](https://gitlab.com/BrianAllred/NYoutubeDL)
+- [SkiaSharp](https://github.com/mono/SkiaSharp)
 - [TagLibSharp](https://github.com/mono/taglib-sharp)
-- [TagLibSharp](https://github.com/mono/taglib-sharp) (2.1.0) ([NuGet](https://www.nuget.org/packages/taglib/))
 
 ## Installation
 
-We recommend you use Chocolatey to install youtube-dl and ffmpeg
+We recommend you use Chocolatey to install youtube-dl and ffmpeg.
 
 ## [Usage](docs)
 
-```powershell
-Invoke-FetchAudio
-Get-Id3Tag
-New-SquareCroppedImage
-Read-SourceAudio
-Set-Id3Tag
-Set-TrackArt
-Update-Mp3Filename
-```
+The main functions from this module are:
+
+- `ConvertTo-Mp3` - wraps over ffmpeg to convert video/audio files to MP3. Preserves metadata by default.
+- `Invoke-DownloadAudio` - wraps over youtube-dl to rip audio from web sources.
 
 ## License
 
