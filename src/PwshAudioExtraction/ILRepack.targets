@@ -19,4 +19,19 @@
       Parallel="true"
       TargetKind="SameAsPrimaryAssembly" />
   </Target>
+
+  <Target Name="InstallLocal" AfterTargets="ILRepacker" Condition="'$(Configuration)' == 'Release'">
+    <PropertyGroup>
+      <ScriptLocation Condition="'$(ScriptLocation)' == ''">$(TargetDir)install-module-local.ps1</ScriptLocation>
+    </PropertyGroup>
+    <Message Text="Running install script..." Importance="high" />
+
+    <Exec Command="where pwsh.exe" ConsoleToMSBuild="true">
+      <Output TaskParameter="ConsoleOutput" PropertyName="PowerShellExe" />
+    </Exec>
+
+    <Exec WorkingDirectory="$(TargetDir)" Command="&quot;$(PowerShellExe)&quot; -NonInteractive -NoProfile -ExecutionPolicy Unrestricted -Command &quot;&amp; { $(ScriptLocation) } &quot;" />
+
+    <Message Text="Install complete." Importance="high" />
+  </Target>
 </Project>

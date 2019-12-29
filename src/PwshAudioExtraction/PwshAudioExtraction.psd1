@@ -70,16 +70,16 @@ Copyright = '(c) Gowon, Ltd. All rights reserved.'
 NestedModules = @("PwshAudioExtraction.psm1")
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-FunctionsToExport = @("Invoke-FetchAudio")
+FunctionsToExport = '*'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @(
+	"ConvertTo-TrackArtImage",
+	"Format-Mp3Filename",
 	"Get-Id3Tag",
+	"Get-SourceAudio",
 	"Set-Id3Tag",
-	"Set-TrackArt",
-	"Update-Mp3Filename",
-	"New-SquareCroppedImage",
-	"Read-SourceAudio")
+	"Set-TrackArt")
 
 # Variables to export from this module
 VariablesToExport = '*'

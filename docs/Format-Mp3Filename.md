@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-TrackArt
+# Format-Mp3Filename
 
 ## SYNOPSIS
 {{ Fill in the Synopsis }}
@@ -14,12 +14,12 @@ schema: 2.0.0
 
 ### PathParameterSet (Default)
 ```
-Set-TrackArt [-Path] <String[]> [-ImagePath] <String> [-DeleteImage] [<CommonParameters>]
+Format-Mp3Filename [-Path] <String[]> [-MaxLength <Int32>] [<CommonParameters>]
 ```
 
 ### LiteralPathParameterSet
 ```
-Set-TrackArt [-LiteralPath] <String[]> [-ImagePath] <String> [-DeleteImage] [<CommonParameters>]
+Format-Mp3Filename [-LiteralPath] <String[]> [-MaxLength <Int32>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -36,36 +36,6 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -DeleteImage
-{{ Fill DeleteImage Description }}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ImagePath
-{{ Fill ImagePath Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 1
-Default value: None
-Accept pipeline input: True (ByPropertyName, ByValue)
-Accept wildcard characters: False
-```
-
 ### -LiteralPath
 {{ Fill LiteralPath Description }}
 
@@ -78,6 +48,21 @@ Required: True
 Position: 0
 Default value: None
 Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
+### -MaxLength
+{{ Fill MaxLength Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -103,11 +88,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### System.String[]
 
-### System.String
-
 ## OUTPUTS
 
-### System.Object
+### System.IO.FileInfo
+
 ## NOTES
 
 ## RELATED LINKS

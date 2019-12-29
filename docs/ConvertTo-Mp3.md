@@ -1,25 +1,19 @@
 ---
-external help file: PwshAudioExtraction.dll-Help.xml
+external help file: PwshAudioExtraction.dll-help.xml
 Module Name: PwshAudioExtraction
 online version:
 schema: 2.0.0
 ---
 
-# Set-TrackArt
+# ConvertTo-Mp3
 
 ## SYNOPSIS
 {{ Fill in the Synopsis }}
 
 ## SYNTAX
 
-### PathParameterSet (Default)
 ```
-Set-TrackArt [-Path] <String[]> [-ImagePath] <String> [-DeleteImage] [<CommonParameters>]
-```
-
-### LiteralPathParameterSet
-```
-Set-TrackArt [-LiteralPath] <String[]> [-ImagePath] <String> [-DeleteImage] [<CommonParameters>]
+ConvertTo-Mp3 [[-Path] <String[]>] [[-Include] <String[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -36,48 +30,18 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -DeleteImage
-{{ Fill DeleteImage Description }}
+### -Include
+{{ Fill Include Description }}
 
 ```yaml
-Type: SwitchParameter
+Type: String[]
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ImagePath
-{{ Fill ImagePath Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
 Position: 1
 Default value: None
 Accept pipeline input: True (ByPropertyName, ByValue)
-Accept wildcard characters: False
-```
-
-### -LiteralPath
-{{ Fill LiteralPath Description }}
-
-```yaml
-Type: String[]
-Parameter Sets: LiteralPathParameterSet
-Aliases: PSPath
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
@@ -86,10 +50,10 @@ Accept wildcard characters: False
 
 ```yaml
 Type: String[]
-Parameter Sets: PathParameterSet
+Parameter Sets: (All)
 Aliases:
 
-Required: True
+Required: False
 Position: 0
 Default value: None
 Accept pipeline input: True (ByPropertyName, ByValue)
@@ -102,8 +66,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### System.String[]
-
-### System.String
 
 ## OUTPUTS
 

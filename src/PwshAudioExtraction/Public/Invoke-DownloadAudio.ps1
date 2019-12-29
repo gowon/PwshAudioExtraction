@@ -1,4 +1,4 @@
-Function Invoke-FetchAudio {
+Function Invoke-DownloadAudio {
   [CmdletBinding(DefaultParameterSetName = 'ImageSet')]
   Param(
     [Parameter(Mandatory = $true,
@@ -40,7 +40,7 @@ Function Invoke-FetchAudio {
   }
 
   Write-Verbose "Output directory is `"$($outputDirectory)`""
-  Push-Location $outputDirectory -StackName "FetchAudio"
+  Push-Location $outputDirectory -StackName "DownloadAudio"
 
   # resolve image path
   $imagePath = $null
@@ -64,7 +64,7 @@ Function Invoke-FetchAudio {
   $json = "{`"FilesystemOptions`":{`"continueOpt`":true},`"GeneralOptions`":{`"ignoreErrors`":true},`"PostProcessingOptions`":{`"addMetadata`":true,`"audioFormat`":4,`"extractAudio`":true,`"postProcessorArgs`":`"-id3v2_version 3`"},`"ThumbnailImagesOptions`":{`"writeThumbnail`":$($writeThumbnail)},`"VideoFormatOptions`":{`"formatAdvanced`":`"bestaudio[ext=m4a]/bestaudio/best`"},`"VideoSelectionOptions`":{`"downloadArchive`":`"$($downloadCacheFilename)`"}}" -replace '\\', '\\'
 
   # Download file
-  Read-SourceAudio -Url $Url -ConfigurationJson $json
+  Get-SourceAudio -Url $Url -ConfigurationJson $json
 
   $ids = Get-Content $downloadCacheFilename | ForEach-Object { $_.Split()[1] }
   $ids | ForEach-Object {
@@ -86,12 +86,12 @@ Function Invoke-FetchAudio {
       }
 
       Write-Verbose "Using image `"$($imageFile)`""
-      New-SquareCroppedImage $imageFile
+      ConvertTo-TrackArtImage $imageFile
       Set-TrackArt -Path $mp3File -ImagePath $imageFile
     }
 
     # Rename MP3
-    Update-Mp3Filename $mp3File
+    Format-Mp3Filename $mp3File
   }
 
   # Cleanup
@@ -102,5 +102,5 @@ Function Invoke-FetchAudio {
     Remove-Item $imagePath -ErrorAction Continue
   }
 
-  Pop-Location -StackName "FetchAudio"
+  Pop-Location -StackName "DownloadAudio"
 }
